@@ -5,6 +5,7 @@ from django.urls import path
 
 
 urlpatterns = [
+    path('', home),
     path('admin/', admin.site.urls),
 ]
 
