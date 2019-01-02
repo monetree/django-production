@@ -25,7 +25,7 @@ SECRET_KEY = 'l&d84m2rm0g3h!60(hz76usoovp*a3)dls9+(e*!z0wr(-rhz1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -131,17 +131,28 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
 from djangodeploy.aws.conf import *
 
 
-# CORS_REPLACE_HTTPS_REFERER      = True
-# HOST_SCHEME                     = "https://"
-# SECURE_PROXY_SSL_HEADER         = ('HTTP_X_FORWARDED_PROTO', 'https')
-# SECURE_SSL_REDIRECT             = True
-# SESSION_COOKIE_SECURE           = True
-# CSRF_COOKIE_SECURE              = True
-# SECURE_HSTS_INCLUDE_SUBDOMAINS  = True
-# SECURE_HSTS_SECONDS             = 1000000
-# SECURE_FRAME_DENY               = True
+CORS_REPLACE_HTTPS_REFERER      = True
+HOST_SCHEME                     = "https://"
+SECURE_PROXY_SSL_HEADER         = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT             = True
+SESSION_COOKIE_SECURE           = True
+CSRF_COOKIE_SECURE              = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS  = True
+SECURE_HSTS_SECONDS             = 1000000
+SECURE_FRAME_DENY               = True
 
-AWS_GROUP_NAME = "django-static-file-group"
-AWS_USERNAME = "django-static-file"
-AWS_ACCESS_KEY_ID = "AKIAIE3XMDFD6ZFNFHCA"
-AWS_SECRET_KEY = "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"
+AWS_ACCESS_KEY_ID = 'AKIAJFW75QDDDK5SCKPA'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'django-static-file'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'static'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static_my_proj"),
+]
+
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
