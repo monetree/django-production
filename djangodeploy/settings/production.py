@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
+    'user'
 ]
 
 MIDDLEWARE = [
@@ -134,6 +135,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
 
 
+from djangodeploy.aws.conf import *
+
 # let's encrypt ssl/tsl https
 
 CORS_REPLACE_HTTPS_REFERER      = True
@@ -145,21 +148,3 @@ CSRF_COOKIE_SECURE              = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS  = True
 SECURE_HSTS_SECONDS             = 1000000
 SECURE_FRAME_DENY               = True
-
-
-
-AWS_ACCESS_KEY_ID = 'AKIAJFW75QDDDK5SCKPA'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'django-static-file'
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_LOCATION = 'static'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static_my_proj"),
-]
-
-STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'

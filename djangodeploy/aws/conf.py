@@ -1,9 +1,7 @@
 import datetime
 
-AWS_GROUP_NAME = "heroku_sattic_group"
-AWS_USERNAME = "heroku-django-static"
-AWS_ACCESS_KEY_ID = "AKIAJHNHDZCLUFDZAODQ"
-AWS_SECRET_ACCESS_KEY = "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"
+AWS_ACCESS_KEY_ID = 'AKIAJFW75QDDDK5SCKPA'
+AWS_SECRET_ACCESS_KEY = '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'
 
 AWS_FILE_EXPIRE = 200
 AWS_PRELOAD_METADATA = True
@@ -11,7 +9,7 @@ AWS_QUERYSTRING_AUTH = True
 
 DEFAULT_FILE_STORAGE = 'djangodeploy.aws.utils.MediaRootS3BotoStorage'
 STATICFILES_STORAGE = 'djangodeploy.aws.utils.StaticRootS3BotoStorage'
-AWS_STORAGE_BUCKET_NAME = 'heroku-django-static'
+AWS_STORAGE_BUCKET_NAME = 'django-static-file'
 S3DIRECT_REGION = 'us-east-1'
 S3_URL = '//%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 MEDIA_URL = '//%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
@@ -27,6 +25,5 @@ AWS_HEADERS = {
     'Expires': expires,
     'Cache-Control': 'max-age=%d' % (int(two_months.total_seconds()), ),
 }
-
 
 AWS_QUERYSTRING_AUTH = True
